@@ -112,7 +112,7 @@ public class Date implements Comparable<Date> {
     @Override
     public int compareTo(Date d) {
         if(this.year == d.year){
-            if(Integer.compare(this.month, d.month)==0){
+            if(this.month == d.month){
                 return Integer.compare(this.day, d.day);
             }
             return Integer.compare(this.month, d.month);
