@@ -1,5 +1,4 @@
 package project1;
-import javax.xml.crypto.Data;
 import java.util.Scanner;
 
 public class Scheduler {
@@ -47,12 +46,15 @@ public class Scheduler {
                 break;
             case "PA":
                 System.out.println("PA");
+                appointments.printByAppointment();
                 break;
             case "PP":
                 System.out.println("PP");
+                appointments.printByPatient();
                 break;
             case "PL":
                 System.out.println("PL");
+                appointments.printByLocation();
                 break;
             case "PS":
                 System.out.println("PS");
@@ -108,13 +110,39 @@ public class Scheduler {
 
         Appointment appointment = new Appointment(appointmentDate, timeslot, patient, provider);
 
-        if(appointment.appointmentValid(appointment, appointments)) appointments.add(appointment);
+        if(appointment.appointmentValid(appointment, appointments)) {
+            appointments.add(appointment);
+            System.out.println("Added appointment.");
+        }
         else System.out.println("Invalid appointment.");
-
     }
 
     private void cancelAppointment(String[] separated_data) {
+        String[] dateStrings = separated_data[0].split("/");
+        int month = Integer.parseInt(dateStrings[0]);
+        int day = Integer.parseInt(dateStrings[1]);
+        int year = Integer.parseInt(dateStrings[2]);
+        Date appointmentDate = new Date(month, day, year);
 
+        String timeslotString = separated_data[1];
+        Timeslot timeslot = Timeslot.valueOf("SLOT" + Integer.parseInt(timeslotString));
+
+        String fname = separated_data[2];
+        String lname = separated_data[3];
+        String[] dobStrings = separated_data[4].split("/");
+        int dobMonth = Integer.parseInt(dobStrings[0]);
+        int dobDay = Integer.parseInt(dobStrings[1]);
+        int dobYear = Integer.parseInt(dobStrings[2]);
+        Date dobDate = new Date(dobMonth, dobDay, dobYear);
+        Profile patient = new Profile(fname, lname, dobDate);
+
+        String providerString = separated_data[5];
+        Provider provider = Provider.valueOf(providerString.toUpperCase());
+
+        Appointment appointment = new Appointment(appointmentDate, timeslot, patient, provider);
+
+        appointments.remove(appointment);
+        if(!appointments.contains(appointment)) System.out.println("Removed appointment.");
     }
 
     public List getAppointments(){
