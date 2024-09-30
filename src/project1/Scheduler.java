@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Scheduler {
     private Scanner scanner;
-    private List appointments = new List();
+    List appointments = new List();
 
     public Scheduler(){
         scanner = new Scanner(System.in);
@@ -22,10 +22,8 @@ public class Scheduler {
                 System.out.println("Scheduler terminated.");
                 break;
             }
-
             else processCommand(input);
         }
-
         scanner.close();
     }
 
@@ -34,6 +32,7 @@ public class Scheduler {
         String command = getCommand(input);
         String data = getData(input); // Rest of information after first comma
         String[] separated_data = data.split(",");
+
         switch (command) {
             case "S":
                 System.out.println("Schedule");
@@ -101,6 +100,10 @@ public class Scheduler {
         Profile patient = new Profile(fname, lname, dobDate);
 
         String providerString = separated_data[5];
+        if(!checkProviderExists(providerString.toUpperCase())){
+            System.out.println("Invalid appointment.");
+            return;
+        }
         Provider provider = Provider.valueOf(providerString.toUpperCase());
 
         Appointment appointment = new Appointment(appointmentDate, timeslot, patient, provider);
@@ -116,6 +119,15 @@ public class Scheduler {
 
     public List getAppointments(){
         return appointments;
+    }
+
+    private boolean checkProviderExists(String providerString) {
+        for (Provider p : Provider.values()) {
+            if (p.name().equals(providerString)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

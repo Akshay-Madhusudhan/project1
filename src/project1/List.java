@@ -29,8 +29,9 @@ public class List {
     //check before add/remove
     public boolean contains(Appointment appointment){
         if(this.appointments == null) return false;
-        for(Appointment app : this.appointments){
-            if(app.equals(appointment)){
+        if(this.appointments[0] == null) System.out.println("First appointment is null");
+        for(int i = 0; i < this.size; i++){
+            if(appointments[i].equals(appointment)){
                 return true;
             }
         }
