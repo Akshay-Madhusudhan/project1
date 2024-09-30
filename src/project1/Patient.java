@@ -22,6 +22,22 @@ public class Patient implements Comparable<Patient> {
         }
     }
 
+    public void remove(Appointment app){
+        Visit temp = visits;
+        Visit prev = null;
+        if(temp!=null && temp.getApp().equals(app)){
+            visits = temp.getNext();
+        }
+        while(temp != null && !temp.getApp().equals(app)){
+            prev = temp;
+            temp = temp.getNext();
+        }
+        if(temp==null){
+            return;
+        }
+        prev.setNext(temp.getNext());
+    }
+
     //traverse the linked list to compute the charge
     public int charge() {
         if(this.visits==null){
