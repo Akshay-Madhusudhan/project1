@@ -10,7 +10,24 @@ public class Patient implements Comparable<Patient> {
     }
 
     @Override
+    public boolean equals(Object obj){
+        if(obj == null){
+            return false;
+        }
+        if(obj.getClass() != this.getClass()){
+            return false;
+        }
+        Patient p = (Patient)obj;
+        return p.profile.equals(this.profile);
+    }
+
+    @Override
     public int compareTo(Patient p) {
-        return 0;
+        return this.profile.compareTo(p.profile);
+    }
+
+    @Override
+    public String toString(){
+        return this.profile.toString();
     }
 }
