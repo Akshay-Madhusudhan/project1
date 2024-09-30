@@ -69,4 +69,8 @@ public class Profile implements Comparable<Profile>{
         System.out.println(abbie3.compareTo(abbie));
     }
 
+    public Date getDob() {
+        return dob;
+    }
+
 }
