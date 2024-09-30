@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Scheduler {
     private Scanner scanner;
     List appointments = new List();
+    MedicalRecord record = new MedicalRecord();
 
     public Scheduler(){
         scanner = new Scanner(System.in);
@@ -52,6 +53,7 @@ public class Scheduler {
                 appointments.printByLocation();
                 break;
             case "PS":
+                printStatements();
                 break;
             default:
                 System.out.println("Invalid command.");
@@ -62,6 +64,7 @@ public class Scheduler {
     // Takes user input, returns command portion (S, C, PL, etc)
     private String getCommand(String input) {
         int commaIndex = input.indexOf(',');
+        if(commaIndex == -1) return input;
         return input.substring(0, commaIndex);
     }
 
@@ -104,8 +107,14 @@ public class Scheduler {
 
         Appointment appointment = new Appointment(appointmentDate, timeslot, patient, provider);
 
-        if(appointment.appointmentValid(appointment, appointments) && !providerBooked(timeslot, appointment)) {
+        if(providerBooked(timeslot, appointment)){
+            System.out.println("Provider already booked for this timeslot.");
+            return;
+        }
+
+        if(appointment.appointmentValid(appointment, appointments)) {
             appointments.add(appointment);
+            addToMedicalRecord(patient, appointment);
             System.out.println("Added appointment.");
         }
         else System.out.println("Invalid appointment.");
@@ -135,6 +144,7 @@ public class Scheduler {
 
         if(appointments.contains(appointment)){
             appointments.remove(appointment);
+            removePatientVisit(patient, appointment);
             System.out.println("Removed appointment.");
         }
         else System.out.println("No appointment to remove.");
@@ -172,13 +182,19 @@ public class Scheduler {
 
         Appointment newAppointment = new Appointment(appointmentDate, newTimeslot, patient, oldAppointment.getProvider());
 
-        if(appointments.contains(oldAppointment) && !providerBooked(newTimeslot, newAppointment)){
+        if(providerBooked(newTimeslot, newAppointment)){
+            System.out.println("Provider already booked for this timeslot.");
+            return;
+        }
+
+        if(appointments.contains(oldAppointment)){
             appointments.remove(oldAppointment);
             appointments.add(newAppointment);
             System.out.println("Rescheduled appointment.");
         } else System.out.println("No appointment to reschedule.");
     }
 
+    // Helper method that checks if a given provider name exists as an enum value in Provider
     private boolean checkProviderExists(String providerString) {
         for (Provider p : Provider.values()) {
             if (p.name().equals(providerString)) {
@@ -192,11 +208,46 @@ public class Scheduler {
     private boolean providerBooked(Timeslot timeslot, Appointment appointment) {
         for(int i = 0; i < appointments.getSize(); i++){
             Appointment pointer = appointments.getAppointments()[i];
-            if(pointer.equals(appointment) && pointer.getProvider().equals(appointment.getProvider())){
+            if(pointer.getDate().equals(appointment.getDate()) &&
+                    pointer.getTimeslot().equals(appointment.getTimeslot()) &&
+                    pointer.getProvider().equals(appointment.getProvider())){
                 return true;
             }
         }
         return false;
+    }
+
+    // Prints all Patients' billing statements
+    private void printStatements(){
+        if(record.getPatients()[0] == null) System.out.println("No patients found in record.");
+        for(int i = 0; i < record.getSize(); i++){
+            int charge = record.getPatients()[i].charge();
+            String fname = record.getPatients()[i].getProfile().getFname();
+            String lname = record.getPatients()[i].getProfile().getLname();
+            System.out.println("** Patient billing list **");
+            System.out.println(fname + " " + lname + ": $" + charge);
+            System.out.println("** end of list **");
+        }
+    }
+
+    // Helper method to make adding to the record easier
+    private void addToMedicalRecord(Profile patient, Appointment appointment){
+        Patient patientObj = new Patient(patient);
+        int patientIndex = record.patientIdx(patientObj);
+        if(patientIndex != -1){
+            record.getPatients()[patientIndex].add(appointment);
+        } else {
+            record.add(patientObj);
+            int newPatientIndex = record.patientIdx(patientObj);
+            record.getPatients()[newPatientIndex].add(appointment);
+        }
+    }
+
+    // Helper method to make removing a Visit from a Patient easier (when cancelling an appointment)
+    private void removePatientVisit(Profile patient, Appointment appointment){
+        Patient patientObj = new Patient(patient);
+        int patientIndex = record.patientIdx(patientObj);
+        record.getPatients()[patientIndex].remove(appointment);
     }
 
 }

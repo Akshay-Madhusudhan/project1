@@ -73,4 +73,7 @@ public class Profile implements Comparable<Profile>{
         return dob;
     }
 
+    public String getFname(){ return fname; }
+    public String getLname(){ return lname; }
+
 }

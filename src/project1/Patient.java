@@ -45,9 +45,12 @@ public class Patient implements Comparable<Patient> {
         }
         Visit ptr = this.visits;
         int tot = 0;
-        while(ptr.getNext()!=null){
+        while(ptr!=null){
             tot += ptr.getApp().getProvider().getSpecialty().getCharge();
-            ptr = ptr.getNext();
+            if(ptr.getNext() != null){
+                ptr = ptr.getNext();
+            }
+            else break;
         }
         return tot;
     }
@@ -73,4 +76,6 @@ public class Patient implements Comparable<Patient> {
     public String toString(){
         return this.profile.toString();
     }
+
+    public Profile getProfile() { return profile; }
 }
