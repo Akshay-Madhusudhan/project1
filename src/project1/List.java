@@ -217,4 +217,8 @@ public class List {
         }
         System.out.println("** end of list **");
     }
+
+    public int findIdx(Appointment appointment){ return find(appointment); }
+
+    public int getSize(){ return this.size; }
 }
