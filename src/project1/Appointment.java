@@ -43,11 +43,29 @@ public class Appointment implements Comparable<Appointment>{
 
     @Override
     public int compareTo(Appointment appointment){
-        return 0;
+        if(this.date.equals(appointment.date)){
+            if(this.timeslot.equals(appointment.timeslot)){
+                return this.patient.compareTo(appointment.patient);
+            }
+            return this.timeslot.compareTo(appointment.timeslot);
+        }
+        return this.date.compareTo(appointment.date);
     }
 
     public Provider getProvider(){
         return this.provider;
+    }
+
+    public Profile getProfile(){
+        return this.patient;
+    }
+
+    public Timeslot getTimeslot(){
+        return this.timeslot;
+    }
+
+    public Date getDate(){
+        return this.date;
     }
 
 }
