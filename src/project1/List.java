@@ -216,6 +216,7 @@ public class List {
             System.out.println(this.appointments[i].getDate().toString() + " " + this.appointments[i].getTimeslot().toString() + " " + this.appointments[i].getProfile().toString() + " [" + this.appointments[i].getProvider().toString() + ", " + this.appointments[i].getProvider().getLocation().toString() + ", " + this.appointments[i].getProvider().getLocation().getCounty() + " " + this.appointments[i].getProvider().getLocation().getZip() + ", " + this.appointments[i].getProvider().getSpecialty().toString() + "]");
         }
         System.out.println("** end of list **");
+
     }
 
     public int findIdx(Appointment appointment){ return find(appointment); }
