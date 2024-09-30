@@ -137,16 +137,13 @@ public class Scheduler {
         Date dobDate = new Date(dobMonth, dobDay, dobYear);
         Profile patient = new Profile(fname, lname, dobDate);
 
-        String providerString = separated_data[5];
-        Provider provider = Provider.valueOf(providerString.toUpperCase());
-
-        Appointment appointment = new Appointment(appointmentDate, timeslot, patient, provider);
+        Appointment appointment = new Appointment(appointmentDate, timeslot, patient, Provider.PATEL);
 
         if(appointments.contains(appointment)){
             appointments.remove(appointment);
             System.out.println("Removed appointment.");
         }
-        else System.out.println("No appointment to remove");
+        else System.out.println("No appointment to remove.");
     }
 
     public List getAppointments(){
