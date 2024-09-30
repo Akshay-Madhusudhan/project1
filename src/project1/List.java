@@ -66,6 +66,10 @@ public class List {
         return;
     }
 
+    public Appointment[] getAppointments(){
+        return this.appointments;
+    }
+
     //ordered by patient profile, date/timeslot
     public void printByPatient(){
 

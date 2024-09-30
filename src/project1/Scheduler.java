@@ -146,9 +146,7 @@ public class Scheduler {
         else System.out.println("No appointment to remove.");
     }
 
-    public List getAppointments(){
-        return appointments;
-    }
+
 
     private boolean checkProviderExists(String providerString) {
         for (Provider p : Provider.values()) {

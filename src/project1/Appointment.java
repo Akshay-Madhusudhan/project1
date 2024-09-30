@@ -46,4 +46,8 @@ public class Appointment implements Comparable<Appointment>{
         return 0;
     }
 
+    public Provider getProvider(){
+        return this.provider;
+    }
+
 }

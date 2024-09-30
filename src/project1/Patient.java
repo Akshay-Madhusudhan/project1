@@ -4,9 +4,36 @@ public class Patient implements Comparable<Patient> {
     private Profile profile;
     private Visit visits; //a linked list of visits (completed appt.)
 
+    public Patient(Profile pro){
+        this.profile = pro;
+        this.visits = null;
+    }
+
+    public void add(Appointment app){
+        Visit newVisit = new Visit(app);
+        if(this.visits == null){
+            this.visits = newVisit;
+        } else {
+            Visit curr = visits;
+            while(curr.getNext() != null){
+                curr = curr.getNext();
+            }
+            curr.setNext(newVisit);
+        }
+    }
+
     //traverse the linked list to compute the charge
     public int charge() {
-        return 0;
+        if(this.visits==null){
+            return 0;
+        }
+        Visit ptr = this.visits;
+        int tot = 0;
+        while(ptr.getNext()!=null){
+            tot += ptr.getApp().getProvider().getSpecialty().getCharge();
+            ptr = ptr.getNext();
+        }
+        return tot;
     }
 
     @Override
