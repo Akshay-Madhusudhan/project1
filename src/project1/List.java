@@ -28,6 +28,7 @@ public class List {
 
     //check before add/remove
     public boolean contains(Appointment appointment){
+        if(this.appointments == null) return false;
         for(Appointment app : this.appointments){
             if(app.equals(appointment)){
                 return true;

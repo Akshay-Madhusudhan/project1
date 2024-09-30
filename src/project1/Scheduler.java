@@ -105,7 +105,7 @@ public class Scheduler {
 
         Appointment appointment = new Appointment(appointmentDate, timeslot, patient, provider);
 
-        if(appointment.appointmentValid(appointment)) appointments.add(appointment);
+        if(appointment.appointmentValid(appointment, appointments)) appointments.add(appointment);
         else System.out.println("Invalid appointment.");
 
     }
