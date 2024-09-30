@@ -7,25 +7,61 @@ public class List {
 
     //helper method
     private int find(Appointment appointment){
-        return 0;
+        int i = 0;
+        for(Appointment app : this.appointments){
+            if(app.equals(appointment)){
+                return i;
+            }
+            i++;
+        }
+        return NOT_FOUND;
     }
 
     //helper method to increase the capacity by 4
     private void grow(){
-
+        Appointment[] newAppointments = new Appointment[appointments.length + 4];
+        for(int i = 0; i<this.size; i++){
+            newAppointments[i] = this.appointments[i];
+        }
+        this.appointments = newAppointments;
     }
 
     //check before add/remove
     public boolean contains(Appointment appointment){
+        for(Appointment app : this.appointments){
+            if(app.equals(appointment)){
+                return true;
+            }
+        }
         return false;
     }
 
     public void add(Appointment appointment){
-
+        if(this.contains(appointment)){
+            return;
+        }
+        if(this.appointments==null){
+            this.appointments = new Appointment[4];
+        }
+        if(this.size == appointments.length){
+            this.grow();
+        }
+        this.appointments[this.size] = appointment;
+        this.size++;
+        return;
     }
 
     public void remove(Appointment appointment){
-
+        int idx = this.find(appointment);
+        if(idx == NOT_FOUND){
+            return;
+        }
+        for(int i = idx; i < this.size-1; i++){
+            this.appointments[i] = this.appointments[i+1];
+        }
+        this.appointments[this.size-1] = null;
+        this.size--;
+        return;
     }
 
     //ordered by patient profile, date/timeslot
