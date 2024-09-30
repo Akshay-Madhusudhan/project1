@@ -117,6 +117,7 @@ public class Scheduler {
         else System.out.println("Invalid appointment.");
     }
 
+    // Takes array of Strings containing data after command, removes an appointment on list if it exists
     private void cancelAppointment(String[] separated_data) {
         String[] dateStrings = separated_data[0].split("/");
         int month = Integer.parseInt(dateStrings[0]);
@@ -141,8 +142,11 @@ public class Scheduler {
 
         Appointment appointment = new Appointment(appointmentDate, timeslot, patient, provider);
 
-        appointments.remove(appointment);
-        if(!appointments.contains(appointment)) System.out.println("Removed appointment.");
+        if(appointments.contains(appointment)){
+            appointments.remove(appointment);
+            System.out.println("Removed appointment.");
+        }
+        else System.out.println("No appointment to remove");
     }
 
     public List getAppointments(){

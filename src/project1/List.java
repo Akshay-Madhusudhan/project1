@@ -9,6 +9,7 @@ public class List {
     private int find(Appointment appointment){
         int i = 0;
         for(Appointment app : this.appointments){
+            if(app == null) return NOT_FOUND;
             if(app.equals(appointment)){
                 return i;
             }
