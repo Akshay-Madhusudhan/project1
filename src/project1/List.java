@@ -20,7 +20,7 @@ public class List {
 
     //helper method to increase the capacity by 4
     private void grow(){
-        Appointment[] newAppointments = new Appointment[appointments.length + 4];
+        Appointment[] newAppointments = new Appointment[this.appointments.length + 4];
         for(int i = 0; i<this.size; i++){
             newAppointments[i] = this.appointments[i];
         }
@@ -31,7 +31,7 @@ public class List {
     public boolean contains(Appointment appointment){
         if(this.appointments == null) return false;
         for(int i = 0; i < this.size; i++){
-            if(appointments[i].equals(appointment)){
+            if(this.appointments[i].equals(appointment)){
                 return true;
             }
         }
@@ -45,12 +45,11 @@ public class List {
         if(this.appointments==null){
             this.appointments = new Appointment[4];
         }
-        if(this.size == appointments.length){
+        if(this.size == this.appointments.length){
             this.grow();
         }
         this.appointments[this.size] = appointment;
         this.size++;
-        return;
     }
 
     public void remove(Appointment appointment){
@@ -63,7 +62,6 @@ public class List {
         }
         this.appointments[this.size-1] = null;
         this.size--;
-        return;
     }
 
     public Appointment[] getAppointments(){
