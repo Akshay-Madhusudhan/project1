@@ -34,30 +34,24 @@ public class Scheduler {
 
         switch (command) {
             case "S":
-                System.out.println("Schedule");
                 scheduleAppointment(separated_data);
                 break;
             case "C":
-                System.out.println("C");
                 cancelAppointment(separated_data);
                 break;
             case "R":
-                System.out.println("R");
+                rescheduleAppointment(separated_data);
                 break;
             case "PA":
-                System.out.println("PA");
                 appointments.printByAppointment();
                 break;
             case "PP":
-                System.out.println("PP");
                 appointments.printByPatient();
                 break;
             case "PL":
-                System.out.println("PL");
                 appointments.printByLocation();
                 break;
             case "PS":
-                System.out.println("PS");
                 break;
             default:
                 System.out.println("Invalid command.");
@@ -110,7 +104,7 @@ public class Scheduler {
 
         Appointment appointment = new Appointment(appointmentDate, timeslot, patient, provider);
 
-        if(appointment.appointmentValid(appointment, appointments)) {
+        if(appointment.appointmentValid(appointment, appointments) && !providerBooked(timeslot, appointment)) {
             appointments.add(appointment);
             System.out.println("Added appointment.");
         }
@@ -146,11 +140,59 @@ public class Scheduler {
         else System.out.println("No appointment to remove.");
     }
 
+    // Takes array of Strings containing data after command, reschedules an appointment to a different timeslot (same day, same provider)
+    private void rescheduleAppointment(String[] separated_data) {
+        String[] dateStrings = separated_data[0].split("/");
+        int month = Integer.parseInt(dateStrings[0]);
+        int day = Integer.parseInt(dateStrings[1]);
+        int year = Integer.parseInt(dateStrings[2]);
+        Date appointmentDate = new Date(month, day, year);
 
+        String timeslotString = separated_data[1];
+        Timeslot timeslot = Timeslot.valueOf("SLOT" + Integer.parseInt(timeslotString));
+
+        String fname = separated_data[2];
+        String lname = separated_data[3];
+        String[] dobStrings = separated_data[4].split("/");
+        int dobMonth = Integer.parseInt(dobStrings[0]);
+        int dobDay = Integer.parseInt(dobStrings[1]);
+        int dobYear = Integer.parseInt(dobStrings[2]);
+        Date dobDate = new Date(dobMonth, dobDay, dobYear);
+        Profile patient = new Profile(fname, lname, dobDate);
+
+        Appointment appointment = new Appointment(appointmentDate, timeslot, patient, Provider.PATEL);
+        if(!appointments.contains(appointment)) {
+            System.out.println("No appointment to reschedule.");
+            return;
+        }
+        Appointment oldAppointment = appointments.getAppointments()[appointments.findIdx(appointment)];
+
+        String newTimeslotString = separated_data[5];
+        Timeslot newTimeslot = Timeslot.valueOf("SLOT" + Integer.parseInt(newTimeslotString));
+
+        Appointment newAppointment = new Appointment(appointmentDate, newTimeslot, patient, oldAppointment.getProvider());
+
+        if(appointments.contains(oldAppointment) && !providerBooked(newTimeslot, newAppointment)){
+            appointments.remove(oldAppointment);
+            appointments.add(newAppointment);
+            System.out.println("Rescheduled appointment.");
+        } else System.out.println("No appointment to reschedule.");
+    }
 
     private boolean checkProviderExists(String providerString) {
         for (Provider p : Provider.values()) {
             if (p.name().equals(providerString)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Takes a given timeslot and appointment, determines if provider of that appointment is busy at that timeslot on that day
+    private boolean providerBooked(Timeslot timeslot, Appointment appointment) {
+        for(int i = 0; i < appointments.getSize(); i++){
+            Appointment pointer = appointments.getAppointments()[i];
+            if(pointer.equals(appointment) && pointer.getProvider().equals(appointment.getProvider())){
                 return true;
             }
         }

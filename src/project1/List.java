@@ -82,4 +82,8 @@ public class List {
     public void printByAppointment(){
 
     }
+
+    public int findIdx(Appointment appointment){ return find(appointment); }
+
+    public int getSize(){ return this.size; }
 }
