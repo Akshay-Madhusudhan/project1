@@ -114,6 +114,11 @@ public class Scheduler {
 
         Appointment appointment = new Appointment(appointmentDate, timeslot, patient, provider);
 
+        if(appointment.appointmentValid(appointment, appointments) != null){
+            System.out.println(appointment.appointmentValid(appointment, appointments));
+            return;
+        }
+
         if(providerBooked(timeslot, appointment)){
             System.out.println("[" + providerString.toUpperCase() + ", " +
                     provider.getLocation().toString().toUpperCase() + ", " + provider.getLocation().countyString() + " " +
@@ -122,16 +127,13 @@ public class Scheduler {
             return;
         }
 
-        if(appointment.appointmentValid(appointment, appointments) == null) {
-            appointments.add(appointment);
-            addToMedicalRecord(patient, appointment);
-            System.out.println(appointment.getDate().toString() + " " + appointment.getTimeslot().toString() + " " +
-                               fname + " " + lname + " " + dobDate.toString() + " [" + providerString.toUpperCase() + ", " +
-                                provider.getLocation().toString().toUpperCase() + ", " + provider.getLocation().countyString() + " " +
-                                provider.getLocation().getZip() + ", " + provider.getSpecialty().toString().toUpperCase() + "] " +
-                                "booked.");
-        }
-        else System.out.println(appointment.appointmentValid(appointment, appointments));
+        appointments.add(appointment);
+        addToMedicalRecord(patient, appointment);
+        System.out.println(appointment.getDate().toString() + " " + appointment.getTimeslot().toString() + " " +
+                fname + " " + lname + " " + dobDate.toString() + " [" + providerString.toUpperCase() + ", " +
+                provider.getLocation().toString().toUpperCase() + ", " + provider.getLocation().countyString() + " " +
+                provider.getLocation().getZip() + ", " + provider.getSpecialty().toString().toUpperCase() + "] " +
+                "booked.");
     }
 
     // Takes array of Strings containing data after command, removes an appointment on list if it exists

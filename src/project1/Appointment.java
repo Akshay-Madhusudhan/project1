@@ -20,7 +20,8 @@ public class Appointment implements Comparable<Appointment>{
         if(date.isWeekend()) return ("Appointment date: " + appointment.getDate().toString() + " is Saturday or Sunday.");
         if(!date.withinSix()) return ("Appointment date: " + appointment.getDate().toString() + " is not within six months.");
         if(!patient.getDob().isValidBirth()) return ("Birth date: " + appointment.getDate().toString() + " is today or a date after today.");
-        if(appointments.contains(appointment)) return ("Patient already scheduled for that appointment.");
+        if(appointments.contains(appointment)) return (appointment.getProfile().getFname() + " " + appointment.getProfile().getLname() + " " +
+                                                        appointment.getProfile().getDob().toString() + " has an existing appointment at the same time slot.");
 
         return null;
     }
