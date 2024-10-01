@@ -195,7 +195,7 @@ public class List {
 
     //ordered by patient profile, date/timeslot
     public void printByPatient(){
-        if(this.appointments==null){
+        if(this.size==0){
             System.out.println("The schedule calendar is empty.");
             return;
         }
@@ -209,7 +209,7 @@ public class List {
 
     //ordered by county, date/timeslot
     public void printByLocation(){
-        if(this.appointments==null){
+        if(this.size==0){
             System.out.println("The schedule calendar is empty.");
             return;
         }
@@ -223,7 +223,7 @@ public class List {
 
     //ordered by date/timeslot, provider name
     public void printByAppointment(){
-        if(this.appointments==null){
+        if(this.size==0){
             System.out.println("The schedule calendar is empty.");
             return;
         }
