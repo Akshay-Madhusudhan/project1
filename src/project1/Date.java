@@ -27,7 +27,7 @@ public class Date implements Comparable<Date> {
     }
 
     public boolean isValidDate(){
-        if(this.year < 0){
+        if(this.year < 1900){
             return false;
         }
 
