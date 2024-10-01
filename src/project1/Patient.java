@@ -23,6 +23,9 @@ public class Patient implements Comparable<Patient> {
     }
 
     public void remove(Appointment app){
+        if(this.visits==null){
+            return;
+        }
         if(this.visits.getNext()==null){
             this.visits = this.visits.getNext();
             return;
