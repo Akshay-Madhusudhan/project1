@@ -112,12 +112,16 @@ public class Scheduler {
             return;
         }
 
-        if(appointment.appointmentValid(appointment, appointments)) {
+        if(appointment.appointmentValid(appointment, appointments) == null) {
             appointments.add(appointment);
             addToMedicalRecord(patient, appointment);
-            System.out.println("Added appointment.");
+            System.out.println(appointment.getDate().toString() + " " + appointment.getTimeslot().toString() + " " +
+                               fname + " " + lname + " " + dobDate.toString() + " [" + providerString.toUpperCase() + ", " +
+                                provider.getLocation().toString().toUpperCase() + ", " + provider.getLocation().countyString() + " " +
+                                provider.getLocation().getZip() + ", " + provider.getSpecialty().toString().toUpperCase() + "] " +
+                                "booked.");
         }
-        else System.out.println("Invalid appointment.");
+        else System.out.println(appointment.appointmentValid(appointment, appointments));
     }
 
     // Takes array of Strings containing data after command, removes an appointment on list if it exists
@@ -145,7 +149,8 @@ public class Scheduler {
         if(appointments.contains(appointment)){
             appointments.remove(appointment);
             removePatientVisit(patient, appointment);
-            System.out.println("Removed appointment.");
+            System.out.println(appointment.getDate().toString() + " " + appointment.getTimeslot().toString() + " " +
+                    fname + " " + lname + " " + dobDate.toString() + " has been canceled.");
         }
         else System.out.println("No appointment to remove.");
     }

@@ -14,16 +14,15 @@ public class Appointment implements Comparable<Appointment>{
     }
 
     // Check if a given appointment is valid
-    public boolean appointmentValid(Appointment appointment, List appointments) {
-        if(!date.isValidDate()) return false;
-        if(date.isBeforeToday()) return false;
-        if(date.isWeekend()) return false;
-        if(!date.withinSix()) return false;
-        if(!patient.getDob().isValidBirth()) return false;
-        if(appointments.contains(appointment)) return false;
+    public String appointmentValid(Appointment appointment, List appointments) {
+        if(!date.isValidDate()) return ("Appointment date: " + appointment.getDate().toString() + " is not a valid calendar date.");
+        if(date.isBeforeToday()) return ("Appointment date: " + appointment.getDate().toString() + " is today or a date before today.");
+        if(date.isWeekend()) return ("Appointment date: " + appointment.getDate().toString() + " is Saturday or Sunday.");
+        if(!date.withinSix()) return ("Appointment date: " + appointment.getDate().toString() + " is not within six months.");
+        if(!patient.getDob().isValidBirth()) return ("Birth date: " + appointment.getDate().toString() + " is today or a date after today.");
+        if(appointments.contains(appointment)) return ("Patient already scheduled for that appointment.");
 
-
-        return true;
+        return null;
     }
 
     @Override

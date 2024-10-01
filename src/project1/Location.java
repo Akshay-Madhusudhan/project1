@@ -15,6 +15,12 @@ public enum Location {
         this.county = county;
         this.zip = zip;
     }
+
+    public String countyString(){
+        String[] separated_county = county.split(" ");
+        String countyOnly = separated_county[0];
+        return countyOnly.substring(0, 1).toUpperCase() + countyOnly.substring(1).toLowerCase();
+    }
     ;
     public String getCounty() {
         return county;
