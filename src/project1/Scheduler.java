@@ -1,10 +1,12 @@
 package project1;
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 public class Scheduler {
     private Scanner scanner;
     List appointments = new List();
     MedicalRecord record = new MedicalRecord();
+    DecimalFormat df = new DecimalFormat("#,###.00");
 
     public Scheduler(){
         scanner = new Scanner(System.in);
@@ -186,7 +188,8 @@ public class Scheduler {
 
         Appointment appointment = new Appointment(appointmentDate, timeslot, patient, Provider.PATEL);
         if(!appointments.contains(appointment)) {
-            System.out.println("No appointment to reschedule.");
+            System.out.println(appointment.getDate().toString() + " " + appointment.getTimeslot().toString() + " " +
+                               fname + " " + lname + " " + dobDate.toString() + " does not exist.");
             return;
         }
         Appointment oldAppointment = appointments.getAppointments()[appointments.findIdx(appointment)];
@@ -254,7 +257,8 @@ public class Scheduler {
             int charge = record.getPatients()[i].charge();
             String fname = record.getPatients()[i].getProfile().getFname();
             String lname = record.getPatients()[i].getProfile().getLname();
-            System.out.println("(" + (i+1) + ") " + fname + " " + lname + " " );
+            String dobString = record.getPatients()[i].getProfile().getDob().toString();
+            System.out.println("(" + (i+1) + ") " + fname + " " + lname + " " + dobString + " [amount due: $" + df.format(charge) + "]");
         }
         System.out.println("** end of list **");
     }
