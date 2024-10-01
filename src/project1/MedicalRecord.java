@@ -44,6 +44,32 @@ public class MedicalRecord {
         return -1;
     }
 
+    private int partitionRecord(int sIdx, int eIdx){
+        Patient piv = this.patients[eIdx];
+        int i = (sIdx - 1);
+        for(int j = sIdx; j < eIdx; j++){
+            if(this.patients[j].getProfile().compareTo(piv.getProfile())<=0){
+                i++;
+                Patient temp = this.patients[i];
+                this.patients[i] = this.patients[j];
+                this.patients[j] = temp;
+            }
+        }
+        Patient temp = this.patients[i+1];
+        this.patients[i+1] = this.patients[eIdx];
+        this.patients[eIdx] = temp;
+
+        return i+1;
+    }
+
+    public void sortRecord(int sIdx, int eIdx){
+        if(sIdx < eIdx){
+            int pIdx = partitionRecord(sIdx, eIdx);
+            sortRecord(sIdx, pIdx-1);
+            sortRecord(pIdx+1, eIdx);
+        }
+    }
+
     public Patient[] getPatients(){ return this.patients; }
     public int getSize(){ return this.size; }
 }
