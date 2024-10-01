@@ -190,6 +190,10 @@ public class List {
 
     //ordered by patient profile, date/timeslot
     public void printByPatient(){
+        if(this.appointments==null){
+            System.out.println("The schedule calendar is empty.");
+            return;
+        }
         this.sortByP(0, this.size-1);
         System.out.println("** Appointments ordered by patient/date/time **");
         for(int i = 0; i<this.size; i++){
@@ -200,6 +204,10 @@ public class List {
 
     //ordered by county, date/timeslot
     public void printByLocation(){
+        if(this.appointments==null){
+            System.out.println("The schedule calendar is empty.");
+            return;
+        }
         this.sortByL(0, this.size-1);
         System.out.println("** Appointments ordered by county/date/time **");
         for(int i = 0; i<this.size; i++){
@@ -210,6 +218,10 @@ public class List {
 
     //ordered by date/timeslot, provider name
     public void printByAppointment(){
+        if(this.appointments==null){
+            System.out.println("The schedule calendar is empty.");
+            return;
+        }
         this.sortByA(0, this.size-1);
         System.out.println("** Appointments ordered by date/time/provider **");
         for(int i = 0; i<this.size; i++){
