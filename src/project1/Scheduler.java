@@ -19,7 +19,7 @@ public class Scheduler {
             if (input.isEmpty()) System.out.println("Please provide an input.");
 
             else if (input.charAt(0) == 'Q') {
-                System.out.println("Scheduler terminated.");
+                System.out.println("Scheduler is terminated.");
                 break;
             }
             else processCommand(input);
@@ -56,7 +56,7 @@ public class Scheduler {
                 printStatements();
                 break;
             default:
-                System.out.println("Invalid command.");
+                System.out.println("Invalid command!");
                 break;
             }
     }
@@ -219,7 +219,11 @@ public class Scheduler {
 
     // Prints all Patients' billing statements
     private void printStatements(){
-        if(record.getPatients()[0] == null) System.out.println("No patients found in record.");
+        if(record.getPatients()[0] == null){
+            System.out.println("No patients found in record.");
+            return;
+        }
+
         for(int i = 0; i < record.getSize(); i++){
             int charge = record.getPatients()[i].charge();
             String fname = record.getPatients()[i].getProfile().getFname();
