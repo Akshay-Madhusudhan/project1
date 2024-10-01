@@ -1,5 +1,10 @@
 package project1;
 
+/**
+ * @author Akshay Madhusudhan
+ * @author Aidan Pembleton
+ */
+
 public enum Location {
     BRIDGEWATER("Somerset County", "08807"),
     EDISON("Middlesex County", "08817"),

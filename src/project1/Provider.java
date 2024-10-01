@@ -1,5 +1,10 @@
 package project1;
 
+/**
+ * @author Akshay Madhusudhan
+ * @author Aidan Pembleton
+ */
+
 public enum Provider {
 
     PATEL(Location.BRIDGEWATER, Specialty.FAMILY),

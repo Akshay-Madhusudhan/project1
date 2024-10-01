@@ -1,5 +1,9 @@
 package project1;
 
+/**
+ * @author Akshay Madhusudhan
+ * @author Aidan Pembleton
+ */
 
 public class Profile implements Comparable<Profile>{
     private String fname;

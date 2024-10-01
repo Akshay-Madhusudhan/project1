@@ -2,6 +2,11 @@ package project1;
 import java.util.Scanner;
 import java.text.DecimalFormat;
 
+/**
+ * @author Aidan Pembleton
+ * @author Akshay Madhusudhan
+ */
+
 public class Scheduler {
     private Scanner scanner;
     List appointments = new List();

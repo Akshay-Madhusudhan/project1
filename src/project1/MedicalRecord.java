@@ -1,5 +1,10 @@
 package project1;
 
+/**
+ * @author Akshay Madhusudhan
+ * @author Aidan Pembleton
+ */
+
 public class MedicalRecord {
     private Patient[] patients;
     private int size; //number of patient objects in the array

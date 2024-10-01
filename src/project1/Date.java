@@ -1,6 +1,11 @@
 package project1;
 import java.util.Calendar;
 
+/**
+ * @author Akshay Madhusudhan
+ * @author Aidan Pembleton
+ */
+
 public class Date implements Comparable<Date> {
     private int year;
     private int month;

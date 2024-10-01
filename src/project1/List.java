@@ -1,5 +1,10 @@
 package project1;
 
+/**
+ * @author Akshay Madhusudhan
+ * @author Aidan Pembleton
+ */
+
 public class List {
     private Appointment[] appointments;
     private int size; //number of appointments in the array

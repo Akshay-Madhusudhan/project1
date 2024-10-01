@@ -1,5 +1,10 @@
 package project1;
 
+/**
+ * @author Akshay Madhusudhan
+ * @author Aidan Pembleton
+ */
+
 public class Patient implements Comparable<Patient> {
     private Profile profile;
     private Visit visits; //a linked list of visits (completed appt.)

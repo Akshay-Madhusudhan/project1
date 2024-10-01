@@ -1,5 +1,10 @@
 package project1;
 
+/**
+ * @author Aidan Pembleton
+ * @author Akshay Madhusudhan
+ */
+
 public enum Timeslot {
     SLOT1 (9, 0),
     SLOT2 (10, 45),
