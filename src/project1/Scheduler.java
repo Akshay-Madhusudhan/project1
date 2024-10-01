@@ -83,8 +83,12 @@ public class Scheduler {
         Date appointmentDate = new Date(month, day, year);
 
         String timeslotString = separated_data[1];
+        if(!Character.isDigit(timeslotString.charAt(0))){
+            System.out.println(timeslotString + " is not a valid timeslot.");
+            return;
+        }
         if(Integer.parseInt(timeslotString) < 1 || Integer.parseInt(timeslotString) > Timeslot.values().length){
-            System.out.println("Invalid appointment.");
+            System.out.println(timeslotString + " is not a valid timeslot.");
             return;
         }
         Timeslot timeslot = Timeslot.valueOf("SLOT" + Integer.parseInt(timeslotString));
@@ -100,7 +104,8 @@ public class Scheduler {
 
         String providerString = separated_data[5];
         if(!checkProviderExists(providerString.toUpperCase())){
-            System.out.println("Invalid appointment.");
+            System.out.println(providerString.substring(0,1).toUpperCase() + providerString.substring(1).toLowerCase() +
+                                " - provider doesn't exist.");
             return;
         }
         Provider provider = Provider.valueOf(providerString.toUpperCase());
@@ -108,7 +113,10 @@ public class Scheduler {
         Appointment appointment = new Appointment(appointmentDate, timeslot, patient, provider);
 
         if(providerBooked(timeslot, appointment)){
-            System.out.println("Provider already booked for this timeslot.");
+            System.out.println("[" + providerString.toUpperCase() + ", " +
+                    provider.getLocation().toString().toUpperCase() + ", " + provider.getLocation().countyString() + " " +
+                    provider.getLocation().getZip() + ", " + provider.getSpecialty().toString().toUpperCase() + "] is not available at slot " +
+                    timeslotString + ".");
             return;
         }
 
@@ -152,7 +160,8 @@ public class Scheduler {
             System.out.println(appointment.getDate().toString() + " " + appointment.getTimeslot().toString() + " " +
                     fname + " " + lname + " " + dobDate.toString() + " has been canceled.");
         }
-        else System.out.println("No appointment to remove.");
+        else System.out.println(appointment.getDate().toString() + " " + appointment.getTimeslot().toString() + " " +
+                fname + " " + lname + " " + dobDate.toString() + " does not exist.");
     }
 
     // Takes array of Strings containing data after command, reschedules an appointment to a different timeslot (same day, same provider)
@@ -187,16 +196,25 @@ public class Scheduler {
 
         Appointment newAppointment = new Appointment(appointmentDate, newTimeslot, patient, oldAppointment.getProvider());
 
+        Provider provider = oldAppointment.getProvider();
+        String providerString = provider.toString();
         if(providerBooked(newTimeslot, newAppointment)){
-            System.out.println("Provider already booked for this timeslot.");
+            System.out.println("[" + providerString.toUpperCase() + ", " +
+                    provider.getLocation().toString().toUpperCase() + ", " + provider.getLocation().countyString() + " " +
+                    provider.getLocation().getZip() + ", " + provider.getSpecialty().toString().toUpperCase() + "] is not available at slot " +
+                    timeslotString + ".");
             return;
         }
 
         if(appointments.contains(oldAppointment)){
             appointments.remove(oldAppointment);
             appointments.add(newAppointment);
-            System.out.println("Rescheduled appointment.");
-        } else System.out.println("No appointment to reschedule.");
+            System.out.println("Rescheduled to " + newAppointment.getDate().toString() + " " + newAppointment.getTimeslot().toString() + " " +
+                                fname + " " + lname + " " + dobDate.toString() + "[" + providerString.toUpperCase() + ", " +
+                                provider.getLocation().toString().toUpperCase() + ", " + provider.getLocation().countyString() + " " +
+                                provider.getLocation().getZip() + ", " + provider.getSpecialty().toString().toUpperCase() + "]");
+        } else System.out.println(newAppointment.getDate().toString() + " " + newAppointment.getTimeslot().toString() + " " +
+                                  fname + " " + lname + " " + dobDate.toString() + " does not exist.");
     }
 
     // Helper method that checks if a given provider name exists as an enum value in Provider
@@ -229,14 +247,16 @@ public class Scheduler {
             return;
         }
 
+        record.sortRecord(0, record.getSize()-1);
+
+        System.out.println("** Billing statement ordered by patient **");
         for(int i = 0; i < record.getSize(); i++){
             int charge = record.getPatients()[i].charge();
             String fname = record.getPatients()[i].getProfile().getFname();
             String lname = record.getPatients()[i].getProfile().getLname();
-            System.out.println("** Patient billing list **");
-            System.out.println(fname + " " + lname + ": $" + charge);
-            System.out.println("** end of list **");
+            System.out.println("(" + (i+1) + ") " + fname + " " + lname + " " );
         }
+        System.out.println("** end of list **");
     }
 
     // Helper method to make adding to the record easier
