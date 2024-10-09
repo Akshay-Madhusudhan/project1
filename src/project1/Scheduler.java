@@ -182,7 +182,14 @@ public class Scheduler {
         Date appointmentDate = new Date(month, day, year);
 
         String timeslotString = separated_data[1];
+
+        if(!Timeslot.contains("SLOT" + Integer.parseInt(timeslotString))){
+            System.out.println(timeslotString + " is not a valid time slot.");
+            return;
+        }
+
         Timeslot timeslot = Timeslot.valueOf("SLOT" + Integer.parseInt(timeslotString));
+
 
         String fname = separated_data[2];
         String lname = separated_data[3];
@@ -202,6 +209,10 @@ public class Scheduler {
         Appointment oldAppointment = appointments.getAppointments()[appointments.findIdx(appointment)];
 
         String newTimeslotString = separated_data[5];
+        if(!Timeslot.contains("SLOT" + Integer.parseInt(newTimeslotString))){
+            System.out.println(newTimeslotString + " is not a valid time slot.");
+            return;
+        }
         Timeslot newTimeslot = Timeslot.valueOf("SLOT" + Integer.parseInt(newTimeslotString));
 
         Appointment newAppointment = new Appointment(appointmentDate, newTimeslot, patient, oldAppointment.getProvider());

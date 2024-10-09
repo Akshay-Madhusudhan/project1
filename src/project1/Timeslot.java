@@ -21,6 +21,15 @@ public enum Timeslot {
         this.minutes = minutes;
     }
 
+    static public boolean contains(String slot){
+        try{
+            Timeslot newSlot = Timeslot.valueOf(slot);
+            return true;
+        } catch (IllegalArgumentException e){
+            return false;
+        }
+    }
+
     // Convert an Timeslot into a String, formatted e.g. "9:00 AM"
     public String toString(){
         int hour12;

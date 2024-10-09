@@ -47,6 +47,9 @@ public class Patient implements Comparable<Patient> {
         if(temp==null){
             return;
         }
+        if(prev==null){
+            return;
+        }
         prev.setNext(temp.getNext());
     }
 
