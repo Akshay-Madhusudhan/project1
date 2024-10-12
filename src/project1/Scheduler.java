@@ -231,7 +231,7 @@ public class Scheduler {
             appointments.remove(oldAppointment);
             appointments.add(newAppointment);
             System.out.println("Rescheduled to " + newAppointment.getDate().toString() + " " + newAppointment.getTimeslot().toString() + " " +
-                                fname + " " + lname + " " + dobDate.toString() + "[" + providerString.toUpperCase() + ", " +
+                                fname + " " + lname + " " + dobDate.toString() + " [" + providerString.toUpperCase() + ", " +
                                 provider.getLocation().toString().toUpperCase() + ", " + provider.getLocation().countyString() + " " +
                                 provider.getLocation().getZip() + ", " + provider.getSpecialty().toString().toUpperCase() + "]");
         } else System.out.println(newAppointment.getDate().toString() + " " + newAppointment.getTimeslot().toString() + " " +

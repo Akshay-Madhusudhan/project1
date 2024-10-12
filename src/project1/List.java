@@ -202,7 +202,7 @@ public class List {
         this.sortByP(0, this.size-1);
         System.out.println("** Appointments ordered by patient/date/time **");
         for(int i = 0; i<this.size; i++){
-            System.out.println(this.appointments[i].getDate().toString() + " " + this.appointments[i].getTimeslot().toString() + " " + this.appointments[i].getProfile().toString() + " [" + this.appointments[i].getProvider().toString() + ", " + this.appointments[i].getProvider().getLocation().toString() + ", " + this.appointments[i].getProvider().getLocation().getCounty() + " " + this.appointments[i].getProvider().getLocation().getZip() + ", " + this.appointments[i].getProvider().getSpecialty().toString() + "]");
+            System.out.println(this.appointments[i].getDate().toString() + " " + this.appointments[i].getTimeslot().toString() + " " + this.appointments[i].getProfile().toString() + " [" + this.appointments[i].getProvider().toString() + ", " + this.appointments[i].getProvider().getLocation().toString() + ", " + this.appointments[i].getProvider().getLocation().countyString() + " " + this.appointments[i].getProvider().getLocation().getZip() + ", " + this.appointments[i].getProvider().getSpecialty().toString() + "]");
         }
         System.out.println("** end of list **\n");
     }
@@ -216,7 +216,7 @@ public class List {
         this.sortByL(0, this.size-1);
         System.out.println("** Appointments ordered by county/date/time **");
         for(int i = 0; i<this.size; i++){
-            System.out.println(this.appointments[i].getDate().toString() + " " + this.appointments[i].getTimeslot().toString() + " " + this.appointments[i].getProfile().toString() + " [" + this.appointments[i].getProvider().toString() + ", " + this.appointments[i].getProvider().getLocation().toString() + ", " + this.appointments[i].getProvider().getLocation().getCounty() + " " + this.appointments[i].getProvider().getLocation().getZip() + ", " + this.appointments[i].getProvider().getSpecialty().toString() + "]");
+            System.out.println(this.appointments[i].getDate().toString() + " " + this.appointments[i].getTimeslot().toString() + " " + this.appointments[i].getProfile().toString() + " [" + this.appointments[i].getProvider().toString() + ", " + this.appointments[i].getProvider().getLocation().toString() + ", " + this.appointments[i].getProvider().getLocation().countyString() + " " + this.appointments[i].getProvider().getLocation().getZip() + ", " + this.appointments[i].getProvider().getSpecialty().toString() + "]");
         }
         System.out.println("** end of list **\n");
     }
@@ -230,7 +230,7 @@ public class List {
         this.sortByA(0, this.size-1);
         System.out.println("** Appointments ordered by date/time/provider **");
         for(int i = 0; i<this.size; i++){
-            System.out.println(this.appointments[i].getDate().toString() + " " + this.appointments[i].getTimeslot().toString() + " " + this.appointments[i].getProfile().toString() + " [" + this.appointments[i].getProvider().toString() + ", " + this.appointments[i].getProvider().getLocation().toString() + ", " + this.appointments[i].getProvider().getLocation().getCounty() + " " + this.appointments[i].getProvider().getLocation().getZip() + ", " + this.appointments[i].getProvider().getSpecialty().toString() + "]");
+            System.out.println(this.appointments[i].getDate().toString() + " " + this.appointments[i].getTimeslot().toString() + " " + this.appointments[i].getProfile().toString() + " [" + this.appointments[i].getProvider().toString() + ", " + this.appointments[i].getProvider().getLocation().toString() + ", " + this.appointments[i].getProvider().getLocation().countyString() + " " + this.appointments[i].getProvider().getLocation().getZip() + ", " + this.appointments[i].getProvider().getSpecialty().toString() + "]");
         }
         System.out.println("** end of list **\n");
 
