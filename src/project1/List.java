@@ -204,7 +204,7 @@ public class List {
         for(int i = 0; i<this.size; i++){
             System.out.println(this.appointments[i].getDate().toString() + " " + this.appointments[i].getTimeslot().toString() + " " + this.appointments[i].getProfile().toString() + " [" + this.appointments[i].getProvider().toString() + ", " + this.appointments[i].getProvider().getLocation().toString() + ", " + this.appointments[i].getProvider().getLocation().getCounty() + " " + this.appointments[i].getProvider().getLocation().getZip() + ", " + this.appointments[i].getProvider().getSpecialty().toString() + "]");
         }
-        System.out.println("** end of list **");
+        System.out.println("** end of list **\n");
     }
 
     //ordered by county, date/timeslot
@@ -218,7 +218,7 @@ public class List {
         for(int i = 0; i<this.size; i++){
             System.out.println(this.appointments[i].getDate().toString() + " " + this.appointments[i].getTimeslot().toString() + " " + this.appointments[i].getProfile().toString() + " [" + this.appointments[i].getProvider().toString() + ", " + this.appointments[i].getProvider().getLocation().toString() + ", " + this.appointments[i].getProvider().getLocation().getCounty() + " " + this.appointments[i].getProvider().getLocation().getZip() + ", " + this.appointments[i].getProvider().getSpecialty().toString() + "]");
         }
-        System.out.println("** end of list **");
+        System.out.println("** end of list **\n");
     }
 
     //ordered by date/timeslot, provider name
@@ -232,7 +232,7 @@ public class List {
         for(int i = 0; i<this.size; i++){
             System.out.println(this.appointments[i].getDate().toString() + " " + this.appointments[i].getTimeslot().toString() + " " + this.appointments[i].getProfile().toString() + " [" + this.appointments[i].getProvider().toString() + ", " + this.appointments[i].getProvider().getLocation().toString() + ", " + this.appointments[i].getProvider().getLocation().getCounty() + " " + this.appointments[i].getProvider().getLocation().getZip() + ", " + this.appointments[i].getProvider().getSpecialty().toString() + "]");
         }
-        System.out.println("** end of list **");
+        System.out.println("** end of list **\n");
 
     }
 

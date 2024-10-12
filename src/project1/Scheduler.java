@@ -19,11 +19,10 @@ public class Scheduler {
 
     public void run() {
         System.out.println("Scheduler is running.");
-
         while (true) {
             String input = scanner.nextLine().trim();
 
-            if (input.isEmpty()) System.out.println("Please provide an input.");
+            if (input.isEmpty()) System.out.println("");
 
             else if (input.charAt(0) == 'Q') {
                 System.out.println("Scheduler is terminated.");
@@ -61,6 +60,7 @@ public class Scheduler {
                 break;
             case "PS":
                 printStatements();
+                appointments = new List();
                 break;
             default:
                 System.out.println("Invalid command!");
@@ -278,7 +278,7 @@ public class Scheduler {
             String dobString = record.getPatients()[i].getProfile().getDob().toString();
             System.out.println("(" + (i+1) + ") " + fname + " " + lname + " " + dobString + " [amount due: $" + df.format(charge) + "]");
         }
-        System.out.println("** end of list **");
+        System.out.println("** end of list **\n");
     }
 
     // Helper method to make adding to the record easier
